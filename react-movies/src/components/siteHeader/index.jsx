@@ -26,7 +26,7 @@ const SiteHeader = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   
   const navigate = useNavigate();
-  const goHome = () => {navigate("/");};
+  const goHome = () => {navigate("/home");};
 
   const menuOptions = [
     { label: "Favourites", path: "/movies/favorites" },

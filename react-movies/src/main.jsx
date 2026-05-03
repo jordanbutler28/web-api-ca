@@ -20,7 +20,6 @@ import TrendingMoviesPage from './pages/trendingMoviesPage';
 import WatchlistMoviesPage from "./pages/watchlistMoviesPage";
 import MovieRecommendationsPage from "./pages/movieRecommendations";
 import CastListPage from "./pages/movieCastListPage";
-import StartPage from "./pages/startPage";
 import LoginPage from "./pages/loginPage";
 import SignUpPage from "./pages/signupPage";
 import ProfilePage from "./pages/profilePage";
@@ -67,27 +66,29 @@ const App = () => {
             <SiteHeader />
             <MoviesContextProvider>
               <Routes>
-                <Route path="/" element={<StartPage />} />
                 <Route path="/home" element={<HomePage />} />
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/signup" element={<SignUpPage />} />
-                
-                <Route element={<ProtectedRoutes/>}>
-                  <Route path="/movies/favorites" element={<FavoriteMoviesPage />} />
-                  <Route path="/movies/watchlist" element={<WatchlistMoviesPage />} />
-                  <Route path="/profile" element={<ProfilePage />} />
-                </Route>
 
-                <Route path="/reviews/:id" element={ <MovieReviewPage /> } />
-                <Route path="/movies/:id" element={<MoviePage />} />
-                <Route path="/movies/:id/recommendations" element={<MovieRecommendationsPage />} />
-                <Route path="/movies/:id/cast" element={<CastListPage />} />
                 <Route path="/movies/upcoming" element={<UpcomingMoviesPage />} />
                 <Route path="/movies/top-rated" element={<TopRatedMoviesPage />} />
                 <Route path="/movies/in-cinemas" element={<MoviesInCinemasPage />} />
                 <Route path="/movies/trending" element={<TrendingMoviesPage />} />
+
+                <Route path="/movies/:id" element={<MoviePage />} />
+                <Route path="/movies/:id/recommendations" element={<MovieRecommendationsPage />} />
+                <Route path="/movies/:id/cast" element={<CastListPage />} />
+
+                <Route path="/reviews/:id" element={ <MovieReviewPage /> } />
                 <Route path="/reviews/form" element={ <AddMovieReviewPage /> } />
-                <Route path="*" element={ <Navigate to="/" /> } />
+
+                <Route element={<ProtectedRoutes/>}>
+                  <Route path="/profile" element={<ProfilePage />} />
+                  <Route path="/movies/favorites" element={<FavoriteMoviesPage />} />
+                  <Route path="/movies/watchlist" element={<WatchlistMoviesPage />} />
+                </Route>
+
+                <Route path="*" element={ <Navigate to="/home" /> } />
               </Routes>
             </MoviesContextProvider>
           </AuthContextProvider>

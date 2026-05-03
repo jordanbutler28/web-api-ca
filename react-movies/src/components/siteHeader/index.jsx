@@ -33,7 +33,7 @@ const SiteHeader = () => {
   const menuOptions = [
     { label: "Favourites", path: "/movies/favorites" },
     { label: "Watchlist", path: "/movies/watchlist" },
-    { label: "Profile", path: "/movies/profile" }
+    { label: "Profile", path: "/profile" }
   ];
 
   const movieMenuOptions = [

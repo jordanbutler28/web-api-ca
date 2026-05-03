@@ -23,3 +23,15 @@ export const getGenres = async () => {
 
     return await response.json();
 };
+
+export const getUpcomingMovies = async () => {
+  const response = await fetch(
+    `https://api.themoviedb.org/3/movie/upcoming?api_key=${process.env.TMDB_KEY}`
+  );
+
+  if (!response.ok) {
+        throw new Error(response.json().message);
+    }
+
+    return await response.json();
+};

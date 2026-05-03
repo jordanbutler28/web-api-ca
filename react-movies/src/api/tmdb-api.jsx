@@ -30,24 +30,37 @@ export const getGenres = () => {
   });
 };
 
-/*
-export const getGenres = () => {
-    return fetch(
-      "https://api.themoviedb.org/3/genre/movie/list?api_key=" +
-        import.meta.env.VITE_TMDB_KEY +
-        "&language=en-US"
-    ).then( (response) => {
-      if (!response.ok) {
-        return response.json().then((error) => {
-          throw new Error(error.status_message || "Something went wrong");
-        });
-      }
-      return response.json();
-    })
-    .catch((error) => {
+export const getUpcomingMovies = () => {
+  return fetch(
+    `http://localhost:8080/api/movies/upcoming`
+  ).then((response) => {
+    if (!response.ok) {
+      return response.json().then((error) => {
+        throw new Error(error.status_message || "Something went wrong");
+      });
+    }
+    return response.json();
+  })
+  .catch((error) => {
       throw error
-   });
+  });
 };
+/*
+export const getUpcomingMovies = () => {
+  return fetch(
+    `https://api.themoviedb.org/3/movie/upcoming?api_key=${import.meta.env.VITE_TMDB_KEY}`
+  ).then((response) => {
+    if (!response.ok) {
+      return response.json().then((error) => {
+        throw new Error(error.status_message || "Something went wrong");
+      });
+    }
+    return response.json();
+  })
+  .catch((error) => {
+      throw error
+  });
+}; 
 */
 
 //rest to be updated...
@@ -144,33 +157,6 @@ export const getMovieRecommendations = (args) => {
       throw error
    });
   };
-
-export const getProductionCountries = (id) => {
-  return fetch(
-    `https://api.themoviedb.org/3/movie/${id}/production_countries?api_key=${import.meta.env.VITE_TMDB_KEY}`
-  )
-    .then((res) => res.json())
-    .then((json) => {
-      console.log(json.results);
-      return json.results;
-    });
-};
-
-export const getUpcomingMovies = () => {
-  return fetch(
-    `https://api.themoviedb.org/3/movie/upcoming?api_key=${import.meta.env.VITE_TMDB_KEY}`
-  ).then((response) => {
-    if (!response.ok) {
-      return response.json().then((error) => {
-        throw new Error(error.status_message || "Something went wrong");
-      });
-    }
-    return response.json();
-  })
-  .catch((error) => {
-      throw error
-  });
-};
 
 export const getTopRatedMovies = () => {
   return fetch(

@@ -8,7 +8,7 @@ const StartPage = () => {
                 Welcome to Media Hub!
             </p>
             <p>
-                <Link to="/login">Login</Link> or <Link to="/signup">Signup</Link> to create tasks!
+                <Link to="/login">Login</Link> or <Link to="/signup">Signup</Link> to create favourite movies or add to your watchlist!
             </p>
         </>
     );

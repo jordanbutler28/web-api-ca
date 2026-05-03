@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router";
+import React, { useState, useContext } from "react";
+import { useNavigate, Link } from "react-router";
+import { AuthContext } from "../../contexts/authContext";
 import { styled } from '@mui/material/styles';
 import { useTheme } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
@@ -25,12 +26,14 @@ const SiteHeader = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   
+  const context = useContext(AuthContext);
   const navigate = useNavigate();
   const goHome = () => {navigate("/home");};
 
   const menuOptions = [
     { label: "Favourites", path: "/movies/favorites" },
     { label: "Watchlist", path: "/movies/watchlist" },
+    { label: "Profile", path: "/movies/profile" }
   ];
 
   const movieMenuOptions = [
@@ -51,8 +54,8 @@ const SiteHeader = () => {
   };
 
   //for movies menu
-  const [moviesAnchhor, setMoviesAnchor] = useState(null);
-  const moviesOpen = Boolean(moviesAnchhor);
+  const [moviesAnchor, setMoviesAnchor] = useState(null);
+  const moviesOpen = Boolean(moviesAnchor);
 
   const handleMoviesMenu = (event) => {
     setMoviesAnchor(event.currentTarget);
@@ -72,6 +75,11 @@ const SiteHeader = () => {
             onClick={goHome} 
             sx={{ flexGrow: 1, cursor: "pointer", display: "flex", alignItems: "center", gap: 1 }}>
             Media Hub
+            {context.isAuthenticated && (
+              <Typography variant="body1">
+                Welcome, {context.userName}!
+              </Typography>
+            )}
           </Typography>
             {isMobile ? (
               <>
@@ -107,14 +115,19 @@ const SiteHeader = () => {
                     {opt.label}
                   </MenuItem>
                 ))}
-                  {menuOptions.map((opt) => (
-                    <MenuItem
-                      key={opt.label}
-                      onClick={() => handleMenuSelect(opt.path)}
-                    >
-                      {opt.label}
-                    </MenuItem>
-                  ))}
+                  {context.isAuthenticated && menuOptions.map((opt) => (
+                  <MenuItem key={opt.label} onClick={() => handleMenuSelect(opt.path)}>
+                    {opt.label}
+                  </MenuItem>
+                ))}
+                {!context.isAuthenticated ? (
+                  <>
+                    <MenuItem onClick={() => handleMenuSelect("/login")}>Login</MenuItem>
+                    <MenuItem onClick={() => handleMenuSelect("/signup")}>Signup</MenuItem>
+                  </>
+                ) : (
+                  <MenuItem onClick={() => context.signout()}>Sign Out</MenuItem>
+                )}
                 </Menu>
               </>
             ) : (
@@ -126,7 +139,7 @@ const SiteHeader = () => {
                 </Button>
                 <Menu
                   id="movies-menu"
-                  anchorEl={moviesAnchhor}
+                  anchorEl={moviesAnchor}
                   open={moviesOpen}
                   onClose={handleMoviesClose}
                 >
@@ -143,17 +156,34 @@ const SiteHeader = () => {
                   ))}
                 </Menu>
 
-                {menuOptions.map((opt) => (
-                  <Button
-                    key={opt.label}
-                    color="inherit"
-                    onClick={() => handleMenuSelect(opt.path)}
-                  >
-                    {opt.label}
+                {context.isAuthenticated && menuOptions.map((opt) => (
+                <Button
+                  key={opt.label}
+                  color="inherit"
+                  onClick={() => handleMenuSelect(opt.path)}
+                >
+                  {opt.label}
+                </Button>
+              ))}
+
+              {context.isAuthenticated ? (
+                <>
+                  <Button color="inherit" onClick={() => context.signout()}>
+                    Sign Out
                   </Button>
-                ))}
-              </>
-            )}
+                </>
+              ) : (
+                <>
+                  <Button color="inherit" onClick={() => navigate("/login")}>
+                    Login
+                  </Button>
+                  <Button color="inherit" onClick={() => navigate("/signup")}>
+                    Signup
+                  </Button>
+                </>
+              )}
+            </>
+          )}
         </Toolbar>
       </AppBar>
       <Offset />

@@ -63,19 +63,19 @@ const App = () => {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <BrowserRouter>
-          <SiteHeader />
           <AuthContextProvider>
+            <SiteHeader />
             <MoviesContextProvider>
               <Routes>
                 <Route path="/" element={<StartPage />} />
                 <Route path="/home" element={<HomePage />} />
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/signup" element={<SignUpPage />} />
-                <Route path="/profile" element={<ProfilePage />} />
-
+                
                 <Route element={<ProtectedRoutes/>}>
                   <Route path="/movies/favorites" element={<FavoriteMoviesPage />} />
                   <Route path="/movies/watchlist" element={<WatchlistMoviesPage />} />
+                  <Route path="/profile" element={<ProfilePage />} />
                 </Route>
 
                 <Route path="/reviews/:id" element={ <MovieReviewPage /> } />

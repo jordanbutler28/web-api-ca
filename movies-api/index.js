@@ -1,6 +1,6 @@
 import dotenv from 'dotenv';
 import express from 'express';
-
+import moviesRouter from './api/movies';   
 import usersRouter from './api/users';
 import './db';
 import cors from 'cors';
@@ -28,6 +28,7 @@ app.use(express.static('public'));
 
 app.use(express.json());
 
+app.use('/api/movies', moviesRouter); 
 app.use('/api/users', usersRouter);
 
 

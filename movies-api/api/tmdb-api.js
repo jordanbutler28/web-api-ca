@@ -72,6 +72,8 @@ export const getTrendingMovies = async () => {
     return await response.json();
 };
 
+//with params
+
 export const getMovie = async (id) => {
   const response = await fetch(
     `https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.TMDB_KEY}`

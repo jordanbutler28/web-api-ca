@@ -77,10 +77,10 @@ export const getNowPlayingMovies = () => {
       throw error
   });
 };
-/*
-export const getNowPlayingMovies = () => {
+
+export const getTrendingMovies = () => {
   return fetch(
-    `https://api.themoviedb.org/3/movie/now_playing?api_key=${import.meta.env.VITE_TMDB_KEY}`
+    `http://localhost:8080/api/movies/trending/movie/day`
   ).then((response) => {
     if (!response.ok) {
       return response.json().then((error) => {
@@ -93,6 +93,8 @@ export const getNowPlayingMovies = () => {
       throw error
   });
 };
+/*
+
 */
 
 //rest to be updated...
@@ -189,23 +191,6 @@ export const getMovieRecommendations = (args) => {
       throw error
    });
   };
-
-export const getTrendingMovies = () => {
-  return fetch(
-    `https://api.themoviedb.org/3/trending/movie/day?api_key=${import.meta.env.VITE_TMDB_KEY}`
-  ).then((response) => {
-    if (!response.ok) {
-      return response.json().then((error) => {
-        throw new Error(error.status_message || "Something went wrong");
-      });
-    }
-    return response.json();
-  })
-  .catch((error) => {
-      throw error
-  });
-};
-
 
 //For users
 export const login = async (username, password) => {

@@ -59,3 +59,15 @@ export const getNowPlayingMovies = async () => {
 
     return await response.json();
 };
+
+export const getTrendingMovies = async () => {
+  const response = await fetch(
+    `https://api.themoviedb.org/3/trending/movie/day?api_key=${process.env.TMDB_KEY}`
+  );
+
+  if (!response.ok) {
+        throw new Error(response.json().message);
+    }
+
+    return await response.json();
+};

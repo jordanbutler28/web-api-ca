@@ -35,3 +35,15 @@ export const getUpcomingMovies = async () => {
 
     return await response.json();
 };
+
+export const getTopRatedMovies = async () => {
+  const response = await fetch(
+    `https://api.themoviedb.org/3/movie/top_rated?api_key=${process.env.TMDB_KEY}`
+  );
+
+  if (!response.ok) {
+        throw new Error(response.json().message);
+    }
+
+    return await response.json();
+};

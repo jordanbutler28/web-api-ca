@@ -93,12 +93,27 @@ export const getTrendingMovies = () => {
       throw error
   });
 };
+
+export const getMovie = (args) => {
+  //console.log(args)
+  const [, idPart] = args.queryKey;
+  const { id } = idPart;
+  return fetch(
+    `http://localhost:8080/api/movies/movie/${id}`
+  ).then((response) => {
+    if (!response.ok) {
+      return response.json().then((error) => {
+        throw new Error(error.status_message || "Something went wrong");
+      });
+    }
+    return response.json();
+  })
+  .catch((error) => {
+      throw error
+  });
+};
+
 /*
-
-*/
-
-//rest to be updated...
-
 export const getMovie = (args) => {
   //console.log(args)
   const [, idPart] = args.queryKey;
@@ -117,6 +132,10 @@ export const getMovie = (args) => {
     throw error
  });
 };
+*/
+
+//rest to be updated...
+
 
 export const getMovieRecommendations = (args) => {
   //console.log(args)

@@ -1,3 +1,4 @@
+//static routes
 export const getMovies = () => {
   return fetch(
     `http://localhost:8080/api/movies/discover`
@@ -94,6 +95,7 @@ export const getTrendingMovies = () => {
   });
 };
 
+//parameterised routes
 export const getMovie = (args) => {
   //console.log(args)
   const [, idPart] = args.queryKey;
@@ -167,29 +169,23 @@ export const getMovieReviews = ({ queryKey }) => {
   });
 };
 
-/*
-
-*/
-
-//rest to be updated...
-
-  export const getMovieCredits = ({ queryKey }) => {
-    const [, idPart] = queryKey;
-    const { id } = idPart;
-    return fetch(
-      `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${import.meta.env.VITE_TMDB_KEY}`
-    ).then( (response) => {
-      if (!response.ok) {
-        return response.json().then((error) => {
-          throw new Error(error.status_message || "Something went wrong");
-        });
-      }
-      return response.json();
-    })
-    .catch((error) => {
+export const getMovieCredits = ({ queryKey }) => {
+  const [, idPart] = queryKey;
+  const { id } = idPart;
+  return fetch(
+    `http://localhost:8080/api/movies/${id}/credits`
+  ).then((response) => {
+    if (!response.ok) {
+      return response.json().then((error) => {
+        throw new Error(error.status_message || "Something went wrong");
+      });
+    }
+    return response.json();
+  })
+  .catch((error) => {
       throw error
-   });
-  };
+  });
+};
 
 //For users
 export const login = async (username, password) => {

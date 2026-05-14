@@ -2,6 +2,7 @@ import dotenv from 'dotenv';
 import express from 'express';
 import moviesRouter from './api/movies';   
 import usersRouter from './api/users';
+import favouritesRouter from './api/favourites';
 import './db';
 import cors from 'cors';
 import authenticate from './authenticate';
@@ -30,6 +31,7 @@ app.use(express.json());
 
 app.use('/api/movies', moviesRouter); 
 app.use('/api/users', usersRouter);
+app.use('/api/favourites', favouritesRouter)
 
 
 app.use(errHandler);

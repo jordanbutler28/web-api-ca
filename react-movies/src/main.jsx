@@ -37,6 +37,9 @@ const queryClient = new QueryClient({
 
 const theme = createTheme({
   typography: {
+    body1: {
+      textAlign: "center",
+    },
     h4: {
       fontFamily: 'Prosto One',
       padding: ".2em",

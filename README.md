@@ -18,7 +18,7 @@ A full-stack **MERN (MongoDB, Express.js, React, Node.js)** web application buil
 * **Dynamic Navigation Header:** Site header updates dynamically based on the user's login status (toggling between Login/Sign Up and authenticated user controls).
 
 ### 🗄️ Custom Secondary API
-* **Mongoose Data Modeling:** Custom Mongoose model and Express router implementing RESTful `GET` endpoints (e.g., `[Insert your second API resource, e.g., Reviews / Favourites / Actors]`).
+* **Mongoose Data Modeling:** Custom Mongoose model and Express router implementing RESTful `GET` and `POST` endpoints (not yet implemented for front-end, but fully functional for backend)
 
 ---
 
